@@ -53,3 +53,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'aylien_text_api'
+gem 'rest-client'
+gem 'yt', '~> 0.28.0'
+gem 'google-api-client', '< 0.9'
+gem 'trollop'
