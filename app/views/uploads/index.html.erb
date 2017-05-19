@@ -5,12 +5,16 @@
 <%= submit_tag("Submit") %>
 <% end %>
 
-<br />
 
 
-<h2>Youtube test form</h2>
+<!-- <h2>Youtube test form</h2>
 <%= form_tag"/uploads",method: "get" do %>
 <%= label_tag(:q, "Search Youtube:") %>
 <%= text_field_tag(:q) %>
 <%= submit_tag("Submit") %>
+<% end %> -->
+
+<% if @link %>
+<img src="<%=params[:image_url] %>" alt="" style="width: 300px">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
 <% end %>

@@ -10,7 +10,7 @@ class UploadsController < ApplicationController
 
   # @auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
   # response = RestClient.get "https://api.imagga.com/v1/tagging?url=#{:image_url}", { :Authorization => auth }
-  attr_accessor :query, :opts
+  # attr_accessor :query, :opts
 
 
   def index
@@ -18,19 +18,33 @@ class UploadsController < ApplicationController
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
     if params[:image_url]
-      response = RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }
+      @response = JSON.parse((RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }))
+      @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
+      @firstConfidence = @response.fetch("results").first.fetch("tags").first.fetch("tag")
+      @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
+      @third = @response.fetch("results").first.fetch("tags").third.fetch("tag")
+      videos = Yt::Collections::Videos.new
+      @result = videos.where(order: 'viewCount')
+      @query = @first
+      get_service
+      @videos = main(@query)
+      # byebug
+      @link = @videos[0][-12..-2]
+      render :index
+      # byebug
     end
-    puts response
+    puts @response
     # byebug
 
     # Youtube stuff
     videos = Yt::Collections::Videos.new
-    @result = videos.where(order: 'viewCount')
+    @result = videos.where(order: 'relevance')
 
     if params[:q]
       @query = params[:q]
       get_service
-      main(@query)
+      @videos = main(@query)
+      @link = @videos[0][-12..-2]
       byebug
     end
   end
@@ -64,7 +78,6 @@ class UploadsController < ApplicationController
     opts = Trollop::options do
       opt :q, 'Search term', :type => String, :default => query
       opt :max_results, 'Max results', :type => :int, :default => 25
-      puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
     end
 
     client, youtube = get_service
@@ -98,11 +111,12 @@ class UploadsController < ApplicationController
         end
       end
 
-      puts "Videos:\n", videos, "\n"
-      puts "Channels:\n", channels, "\n"
-      puts "Playlists:\n", playlists, "\n"
+      # puts "Videos:\n", videos, "\n"
+      # puts "Channels:\n", channels, "\n"
+      # puts "Playlists:\n", playlists, "\n"
     rescue Google::APIClient::TransmissionError => e
       puts e.result.body
     end
+    videos
   end
 end
