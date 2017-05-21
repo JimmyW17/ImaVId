@@ -5,6 +5,8 @@ class UploadsController < ApplicationController
   require 'google/api_client'
   require 'trollop'
 
+
+
   # api_key = ENV['IMAGGA_API_KEY']
   # api_secret = ENV['IMAGGA_API_SECRET']
 
@@ -24,14 +26,18 @@ class UploadsController < ApplicationController
       @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
       @third = @response.fetch("results").first.fetch("tags").third.fetch("tag")
       videos = Yt::Collections::Videos.new
-      @result = videos.where(order: 'viewCount')
-      @query = @first
+      @result = videos.where(order: 'relevance')
+      @query = @first+@second
       get_service
       @videos = main(@query)
       # byebug
       @link = @videos[0][-12..-2]
+
+      # GIPHY API
+      @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+      @giphyEmbed = @giphyResponse.fetch("data").first.fetch("embed_url")
+      byebug
       render :index
-      # byebug
     end
     puts @response
     # byebug
