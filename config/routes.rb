@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   # get '/uploads' => 'uploads#get_tags'
   resources :uploads
+  root to: 'home#index'
 end
