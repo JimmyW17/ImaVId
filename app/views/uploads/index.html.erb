@@ -1,11 +1,37 @@
-<h2>Imagga test form</h2>
-<%= form_tag"/uploads", method: "get" do %>
-<%= label_tag(:image_url, "Image Url:") %>
-<%= text_field_tag(:image_url) %>
-<%= submit_tag("Submit") %>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Imagga test form</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag"/uploads", method: "get" do %>
+    <%= label_tag(:image_url, "Image Url:") %>
+    <%= text_field_tag(:image_url) %>
+    <%= submit_tag("Submit") %>
+    <% end %>
+  </div>
+</div>
+<% if @link %>
+
+<div class="row" id="showImage">
+  <div class="col-md-6">
+    <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-12">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <iframe src="<%=@giphyEmbed%>" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>
-
-
 
 <!-- <h2>Youtube test form</h2>
 <%= form_tag"/uploads",method: "get" do %>
@@ -13,9 +39,3 @@
 <%= text_field_tag(:q) %>
 <%= submit_tag("Submit") %>
 <% end %> -->
-
-<% if @link %>
-<img src="<%=params[:image_url] %>" alt="" style="width: 300px">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
-<iframe src="<%=@giphyEmbed%>" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-<% end %>

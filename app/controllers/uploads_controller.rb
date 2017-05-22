@@ -27,7 +27,7 @@ class UploadsController < ApplicationController
       @third = @response.fetch("results").first.fetch("tags").third.fetch("tag")
       videos = Yt::Collections::Videos.new
       @result = videos.where(order: 'relevance')
-      @query = @first+@second
+      @query = @first+' '+@second
       get_service
       @videos = main(@query)
       # byebug

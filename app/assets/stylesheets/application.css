@@ -83,6 +83,10 @@ body {
   margin-bottom: 10px;
 }
 
+#header {
+  margin-bottom: 60px;
+}
+
 .masthead-nav > li {
   display: inline-block;
 }
@@ -151,16 +155,18 @@ body {
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
-    position:relative;
-    top: 0;
+    /*position:absolute;
+    top: 0;*/
   }
   .mastfoot {
     position: relative;
     bottom: 0;
+    clear: both;
   }
   /* Start the vertical centering */
   .site-wrapper-inner {
-    vertical-align: middle;
+    /*vertical-align: middle;*/
+    min-height: 100%;
   }
   /* Handle the widths */
   .masthead,
@@ -174,6 +180,6 @@ body {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 100%;
   }
 }

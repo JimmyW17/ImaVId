@@ -57,3 +57,5 @@ gem 'rest-client'
 gem 'yt', '~> 0.28.0'
 gem 'google-api-client', '< 0.9'
 gem 'trollop'
+gem 'devise'
+gem "paperclip", "~> 4.2"

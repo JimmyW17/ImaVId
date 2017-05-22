@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>  
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <div class="site-wrapper">
@@ -21,7 +21,7 @@
 
         <div class="cover-container">
 
-          <div class="masthead clearfix">
+          <div class="masthead clearfix" id="header">
             <div class="inner">
               <h3 class="masthead-brand">With An Image</h3>
               <nav>
@@ -35,6 +35,12 @@
                   <li>
                     <a href="#">Contact</a>
                   </li>
+                  <%if user_signed_in?%>
+                  <%=link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+                  <%else%>
+                  <%=link_to "Sign Up", new_user_registration_path%>
+                  <%=link_to "Sign In", new_user_session_path%>
+                  <%end%>
                 </ul>
               </nav>
             </div>
@@ -57,5 +63,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   </body>
 </html>
