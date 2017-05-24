@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522205914) do
+ActiveRecord::Schema.define(version: 20170524013205) do
 
   create_table "albums", force: :cascade do |t|
     t.integer "user_id"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20170522205914) do
   create_table "pictures", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer "album_id"
+    t.string "picture_remote_url"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,10 +42,6 @@ ActiveRecord::Schema.define(version: 20170522205914) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
     t.integer "album_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

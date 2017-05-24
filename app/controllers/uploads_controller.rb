@@ -36,7 +36,12 @@ class UploadsController < ApplicationController
       # GIPHY API
       @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
       @giphyEmbed = @giphyResponse.fetch("data").first.fetch("embed_url")
-      byebug
+
+      if user_signed_in?
+        @album = current_user.album
+        @picture = Picture.new(:album=>@album)
+      end
+      # byebug
       render :index
     end
     puts @response

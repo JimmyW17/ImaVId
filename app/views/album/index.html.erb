@@ -1,1 +1,7 @@
 album
+
+<% @pictures.each do |picture| %>
+  <% if picture.picture_remote_url? %>
+    <%= image_tag picture.picture_remote_url, size: "300x300" %>
+  <% end %>
+<% end %>

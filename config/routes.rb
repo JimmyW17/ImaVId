@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   # get '/uploads' => 'uploads#get_tags'
   resources :uploads
-  get '/album' => 'album#index'
+  resources :album do
+    resources :pictures
+  end
   root to: 'home#index'
 end
