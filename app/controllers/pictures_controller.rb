@@ -10,6 +10,10 @@ class PicturesController < ApplicationController
     @pictures = Picture.all
   end
 
+  def show
+    @picture = Picture.find(params[:id])
+  end
+
   def new
     @album = Album.where(user_id: current_user.id)
     @picture = @album.pictures.new
@@ -23,7 +27,7 @@ class PicturesController < ApplicationController
     # @picture.save!
     if @picture.save
       flash[:notice] = "Image saved"
-      redirect_to root_path
+      redirect_to album_index_path
     else
       flash[:alert] = "Something went wrong attempting to save image"
       redirect_to uploads_path

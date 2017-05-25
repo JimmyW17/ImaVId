@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_one :album
 
-  after_save :link_user_album
+  after_create :link_user_album
 
   # def create_user_album
   #   Album.create(user_id: User.last.id)

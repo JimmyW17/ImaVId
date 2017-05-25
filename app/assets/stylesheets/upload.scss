@@ -3,11 +3,27 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 input {
-  color: black !important;
+  color: white !important;
+  background-color: transparent !important;
 }
 
+.fa {
+  position: absolute;
+  right: 0px;
+}
+
+
 #showImage {
-  width: 100% !important;
+  width: 90% !important;
+  position: fixed;
+  top: 50px;
+  border: 1px solid black;
+  background: black;
+  color: white;
+  max-height: 80%;
+  overflow: scroll;
+  margin: 0 auto;
+
 }
 
 .longCol {

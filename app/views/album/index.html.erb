@@ -1,7 +1,9 @@
-album
-
-<% @pictures.each do |picture| %>
-  <% if picture.picture_remote_url? %>
-    <%= image_tag picture.picture_remote_url, size: "300x300" %>
+<div class="row" id="album">
+  <% @pictures.each do |picture| %>
+    <% if picture.picture_remote_url? %>
+      <div class="col-md-3">
+        <%= link_to image_tag(picture.picture_remote_url), album_picture_path(picture.album_id, picture.id) %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

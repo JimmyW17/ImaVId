@@ -59,3 +59,4 @@ gem 'google-api-client', '< 0.9'
 gem 'trollop'
 gem 'devise'
 gem "paperclip", "~> 4.2"
+gem "font-awesome-rails"

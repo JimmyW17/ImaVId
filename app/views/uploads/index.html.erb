@@ -1,15 +1,8 @@
 <div class="row">
-  <div class="col-md-12">
-    <h2>Imagga test form</h2>
-  </div>
-</div>
-<div class="row">
   <div class="col-md-3"></div>
   <div class="col-md-6 form-group">
-    <%= form_tag"/uploads", method: "get" do %>
-    <%= label_tag(:image_url, "Image Url:") %>
-    <%= text_field_tag :image_url, "", class:'form-control' %>
-    <%= submit_tag "Submit", class:"btn btn-default" %>
+    <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
+    <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control' %>
     <% end %>
   </div>
   <div class="col-md-3"></div>
@@ -17,30 +10,33 @@
 <% if @link %>
 
 <div class="row" id="showImage">
-  <div class="col-md-6">
-    <div class="row">
-      <div class="col-md-12">
+  <!-- <div class="col-md-6">
+    <div class="row"> -->
+    <i class="fa fa-times-circle fa-2x" id="closeIcon" aria-hidden="true"></i>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
         <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
         <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
-          <%= form.text_field :image, value: params[:image_url] %>
+          <%= form.hidden_field :image, value: params[:image_url] %>
           <%= form.hidden_field :picture_remote_url, :value => params[:image_url] %>
-          <%= form.submit "Add to Album"%>
+          <%= form.submit "Add to Album", class:"btn btn-default"%>
         <% end %>
-      </div>
+      <!-- </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12"> -->
         <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
-      </div>
+      <!-- </div>
     </div>
   </div>
   <div class="col-md-6">
     <div class="row" style="height:557px">
-      <div class="col-md-12 longCol">
+      <div class="col-md-12 longCol"> -->
         <iframe src="<%=@giphyEmbed%>" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
       </div>
-    </div>
-  </div>
+      <div class="col-md-3"></div>
+    <!-- </div>
+  </div> -->
 </div>
 <% end %>
 
@@ -50,3 +46,4 @@
 <%= text_field_tag(:q) %>
 <%= submit_tag("Submit") %>
 <% end %> -->
+<%= javascript_include_tag 'upload', 'data-turbolinks-track': 'reload' %>
