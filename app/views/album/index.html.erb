@@ -1,9 +1,24 @@
-<div class="row" id="album">
+<div class="grid album">
+  <div class="grid-sizer"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item grid-item--width2"></div>
+  <div class="grid-item"></div>
+  <% @cols = 1 %>
   <% @pictures.each do |picture| %>
     <% if picture.picture_remote_url? %>
+    <% if @cols <= 4 %>
       <div class="col-md-3">
         <%= link_to image_tag(picture.picture_remote_url), album_picture_path(picture.album_id, picture.id) %>
       </div>
+      <% @cols += 1 %>
+    <% else %>
+  </div>
+    <div class="row album">
+      <div class="col-md-3">
+        <%= link_to image_tag(picture.picture_remote_url), album_picture_path(picture.album_id, picture.id) %>
+      </div>
+    <% @cols = 2 %>
     <% end %>
+  <% end %>
   <% end %>
 </div>

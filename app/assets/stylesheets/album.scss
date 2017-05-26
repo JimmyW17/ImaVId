@@ -4,14 +4,17 @@
 
 /* ---- grid ---- */
 
-#album img{
+.album img{
   position: relative;
   top: 0px;
+  max-height: 200px;
   max-width: 100%;
+  margin: 0 auto;
 }
 
-// .col-md-3 {
-//   // position: relative;
-//   // bottom: 100px;
-//   padding: 50px;
-// }
+.album {
+  margin-bottom: 30px;
+}
+
+.grid-item, .grid-sizer { width: 20%; }
+.grid-item--width2 { width: 40%; }

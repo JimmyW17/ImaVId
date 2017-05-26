@@ -1,3 +1,21 @@
-<h1>Picture show</h1>
-
-<%= image_tag @picture.picture_remote_url %>
+<div class="row album">
+  <div class="col-md-4"></div>
+  <div class="col-md-4"><%= image_tag @picture.picture_remote_url %></div>
+  <div class="col-md-4"></div>
+</div>
+<i class="fa fa-picture-o fa-4x" id='gif_icon' aria-hidden="true"></i>
+<i class="fa fa-youtube-play fa-4x" id='youtube_icon' aria-hidden="true"></i>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <span id="gif_render"><%= render "gif" %></span>
+    <span id="youtube_render"><%= render "youtube" %></span>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-md-6">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class="col-md-6">
+    <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+  </div>
+</div> -->
