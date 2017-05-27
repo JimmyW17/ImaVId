@@ -30,3 +30,37 @@ input {
   position: relative;
   top: 25%;
 }
+
+// Drag and Drop CSS
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}
+.box {
+  width: 40%;
+  height: 200px;
+  margin: 0 auto;
+
+}
+
+.box.has-advanced-upload {
+  background-color: transparent;
+  outline: 2px dashed black;
+  outline-offset: -10px;
+}
+.box.has-advanced-upload .box__dragndrop {
+  display: inline;
+}
+
+.box.is-dragover {
+  background-color: grey;
+}
+
+.box.is-uploading .box__input {
+  visibility: none;
+}
+.box.is-uploading .box__uploading {
+  display: block;
+}
