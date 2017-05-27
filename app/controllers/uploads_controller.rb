@@ -20,7 +20,8 @@ class UploadsController < ApplicationController
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
     if params[:image_url]
-      @response = JSON.parse((RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }))
+      @json = RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }
+      @response = JSON.parse(@json)
       @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
       @firstConfidence = @response.fetch("results").first.fetch("tags").first.fetch("tag")
       @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")

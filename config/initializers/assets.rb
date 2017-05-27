@@ -15,3 +15,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 Rails.application.config.assets.precompile += %w( upload.js )
 Rails.application.config.assets.precompile += %w( album.js )
+Rails.application.config.assets.precompile += %w( pictures.js )

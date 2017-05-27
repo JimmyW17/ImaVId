@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524013205) do
+ActiveRecord::Schema.define(version: 20170527151559) do
 
   create_table "albums", force: :cascade do |t|
     t.integer "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170524013205) do
     t.datetime "image_updated_at"
     t.integer "album_id"
     t.string "picture_remote_url"
+    t.text "tags"
   end
 
   create_table "users", force: :cascade do |t|
