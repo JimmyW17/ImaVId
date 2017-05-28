@@ -29,12 +29,19 @@ class PicturesController < ApplicationController
     get_service
     @videos = main(@query)
     # byebug
-    @link = @videos[0][-12..-2]
+    @rand = rand(0..10)
+    @link = @videos[@rand][-12..-2]
 
     # GIPHY API
     @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
-    @giphyEmbed = @giphyResponse.fetch("data").first.fetch("embed_url")
-
+    @giphyRange = @giphyResponse.fetch("data").size
+    @giphyRand = rand(0..@giphyRange-1)
+    if @giphyRange > 10
+      @giphyEmbed = @giphyResponse.fetch("data")[rand(0..10)].fetch("embed_url")
+    else
+      @giphyEmbed = @giphyResponse.fetch("data")[@giphyRand].fetch("embed_url")
+    end
+    
     if user_signed_in?
       @album = current_user.album
       # @picture = Picture.new(:album=>@album)
@@ -60,6 +67,7 @@ class PicturesController < ApplicationController
 
   def new
     @album = Album.where(user_id: current_user.id)
+    # byebug
     @picture = @album.pictures.new
   end
 

@@ -61,4 +61,3 @@ gem 'devise'
 gem "paperclip", "~> 4.2"
 gem "font-awesome-rails"
 gem 'jquery-rails'
-gem 'rails-assets-masonry', source: 'https://rails-assets.org'

@@ -16,6 +16,7 @@ class UploadsController < ApplicationController
 
 
   def index
+    @album = Album.where(user_id: current_user.id)
     api_key = ENV['IMAGGA_API_KEY']
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
@@ -58,6 +59,15 @@ class UploadsController < ApplicationController
       @videos = main(@query)
       @link = @videos[0][-12..-2]
       byebug
+    end
+  end
+
+  def create
+    @picture = Picture.create(picture_params)
+    if @picture.save
+      render :index
+    else
+      redirect_to root_path
     end
   end
 
@@ -130,5 +140,10 @@ class UploadsController < ApplicationController
       puts e.result.body
     end
     videos
+  end
+
+  private
+  def picture_params
+    params.require(:picture).permit(:image)
   end
 end

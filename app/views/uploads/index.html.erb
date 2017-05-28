@@ -1,11 +1,14 @@
 <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6 form-group">
+  <div class="col-md-6 col-md-offset-3 form-group">
     <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
     <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control' %>
     <% end %>
   </div>
-  <div class="col-md-3"></div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+  </div>
 </div>
 <% if @link %>
 
@@ -40,16 +43,8 @@
   </div> -->
 </div>
 <% end %>
-<form class="box" method="post" action="" enctype="multipart/form-data">
-  <div class="box__input">
-    <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
-    <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-    <button class="box__button" type="submit">Upload</button>
-  </div>
-  <div class="box__uploading">Uploading&hellip;</div>
-  <div class="box__success">Done!</div>
-  <div class="box__error">Error! <span></span>.</div>
-</form>
+
+
 
 <!-- <h2>Youtube test form</h2>
 <%= form_tag"/uploads",method: "get" do %>
