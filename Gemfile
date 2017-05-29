@@ -61,3 +61,4 @@ gem 'devise'
 gem "paperclip", "~> 4.2"
 gem "font-awesome-rails"
 gem 'jquery-rails'
+gem "chartkick"

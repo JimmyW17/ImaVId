@@ -19,6 +19,7 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     # @response = JSON.parse((RestClient.get "https://api.imagga.com/v1/tagging?url=#{@picture.picture_remote_url}", { :Authorization => auth }))
     @response = JSON.parse(@picture.tags)
+    @tags = @response.fetch("results").first.fetch("tags")[0..4]
     @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
     @firstConfidence = @response.fetch("results").first.fetch("tags").first.fetch("tag")
     @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
@@ -41,7 +42,7 @@ class PicturesController < ApplicationController
     else
       @giphyEmbed = @giphyResponse.fetch("data")[@giphyRand].fetch("embed_url")
     end
-    
+
     if user_signed_in?
       @album = current_user.album
       # @picture = Picture.new(:album=>@album)

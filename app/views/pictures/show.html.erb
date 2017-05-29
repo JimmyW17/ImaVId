@@ -19,3 +19,8 @@
     <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
   </div>
 </div>
+<% hash = Hash.new %>
+<% @tags.each do |t| %>
+<% hash[t['tag']] = t['confidence'] %>
+<% end %>
+<%= bar_chart hash %>
