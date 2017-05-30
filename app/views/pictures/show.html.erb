@@ -1,25 +1,34 @@
-<div class="row album picture_show_image">
-  <div class="col-md-6 col-md-offset-3 picture_div"><%= image_tag @picture.picture_remote_url %></div>
-  <div class="col-md-6 col-md-offset-3">
-  <%= link_to "Delete", album_picture_path(@album, @picture), method: :delete %>
+<div class="background_div">
+  <div class="row album picture_show_image">
+    <div class="col-md-6 col-md-offset-3 picture_div"><%= image_tag @picture.picture_remote_url %></div>
+    <div class="col-md-6 col-md-offset-3">
+      <%= link_to "Delete", album_picture_path(@album, @picture), method: :delete %>
+    </div>
   </div>
 </div>
-
-<br>
 <div class="row confidence">
   <% if flash[:confident] %>
-  <div class="col-md-8 col-md-offset-2" id="confident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
-<%= flash[:confident] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="confident">
+    <p>
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <%= flash[:confident] %></p>
+  </div>
   <% elsif flash[:maybe] %>
-  <div class="col-md-8 col-md-offset-2" id="maybe"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
-<%= flash[:maybe] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="maybe">
+    <p>
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <%= flash[:maybe] %></p>
+  </div>
   <% elsif flash[:unconfident] %>
-  <div class="col-md-8 col-md-offset-2" id="unconfident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
-<%= flash[:unconfident] %></p></div>
-  <% else %>
+  <div class="col-md-8 col-md-offset-2" id="unconfident">
+    <p>
+      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <%= flash[:unconfident] %></p>
+  </div>
+<% else %>
   <% end %>
 </div>
-<div class="row picture_div">
+<div class="row">
   <div class="col-md-6">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
   </div>
@@ -30,12 +39,11 @@
 <div class="row">
   <div class="col-md-6">
     <%= form_tag album_picture_path(@album, @picture) do %>
-      <%= text_field_tag 'ytslider', nil, class: 'slider', type: 'text', data: {'slider-id' => 'ytslider', 'slider-min' => '1', 'slider-max' => '50', 'slider-step' => '1', 'slider-value' => '10', 'slider-orientation' => 'vertical', 'slider-selection' => 'after', 'slider-tooltip' => 'hide'} %>
+    <%= text_field_tag 'ytslider', nil, class: 'slider', type: 'text', data: {'slider-id' => 'ytslider', 'slider-min' => '1', 'slider-max' => '50', 'slider-step' => '1', 'slider-value' => '10', 'slider-orientation' => 'vertical', 'slider-selection' =>
+    'after', 'slider-tooltip' => 'hide'} %>
     <% end %>
   </div>
-  <div class="col-md-6">
-
-  </div>
+  <div class="col-md-6"></div>
 </div>
 <% hash = Hash.new %>
 <% @tags.each do |t| %>

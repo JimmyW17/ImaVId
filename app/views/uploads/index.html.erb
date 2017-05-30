@@ -1,24 +1,28 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3 form-group upload_form_div">
-    <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
-    <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control' %>
-    <% end %>
+<div class="background_div">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 form-group upload_form_div">
+      <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
+      <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control' %>
+      <% end %>
+    </div>
+  </div>
+  <% if @link %>
+  <div class="row image_div">
+    <div class="col-md-6 col-md-offset-3">
+      <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
+      <% if user_signed_in? %>
+      <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
+      <%= form.hidden_field :image, value: params[:image_url] %>
+      <%= form.hidden_field :tags, value: @json %>
+      <%= form.hidden_field :picture_remote_url, :value => params[:image_url] %>
+      <%= form.submit "Add to Album", class:"btn btn-default"%>
+      <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
-<% if @link %>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
-    <% if user_signed_in? %>
-    <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
-    <%= form.hidden_field :image, value: params[:image_url] %>
-    <%= form.hidden_field :tags, value: @json %>
-    <%= form.hidden_field :picture_remote_url, :value => params[:image_url] %>
-    <%= form.submit "Add to Album", class:"btn btn-default"%>
-    <% end %>
-    <% end %>
-  </div>
-</div>
+
+
 <div class="row confidence">
   <% if flash[:confident] %>
   <div class="col-md-8 col-md-offset-2" id="confident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
