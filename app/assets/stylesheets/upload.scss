@@ -5,8 +5,15 @@
 input {
   color: black !important;
   background-color: transparent !important;
-  border-color: black !important;
+  border: 3px solid black !important;
+  margin-top: 10px;
+  // border-color: black !important;
 }
+
+input::placeholder {
+  color: black !important;
+}
+
 
 .closeButton {
   position: absolute;
@@ -18,7 +25,7 @@ input {
 }
 
 .image_div {
-  margin-top: 170px;
+  margin-top: 160px;
 }
 #showImage {
   width: 90% !important;

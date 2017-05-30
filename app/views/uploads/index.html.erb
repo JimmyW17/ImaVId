@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3 form-group upload_form_div">
       <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
-      <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control' %>
+      <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control', autofocus: :true %>
       <% end %>
     </div>
   </div>

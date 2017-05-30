@@ -36,15 +36,7 @@
     <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-6">
-    <%= form_tag album_picture_path(@album, @picture) do %>
-    <%= text_field_tag 'ytslider', nil, class: 'slider', type: 'text', data: {'slider-id' => 'ytslider', 'slider-min' => '1', 'slider-max' => '50', 'slider-step' => '1', 'slider-value' => '10', 'slider-orientation' => 'vertical', 'slider-selection' =>
-    'after', 'slider-tooltip' => 'hide'} %>
-    <% end %>
-  </div>
-  <div class="col-md-6"></div>
-</div>
+
 <% hash = Hash.new %>
 <% @tags.each do |t| %>
 <% hash[t['tag']] = t['confidence'] %>
