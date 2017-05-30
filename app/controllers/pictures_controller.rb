@@ -16,20 +16,20 @@ class PicturesController < ApplicationController
   end
 
   def show
+    @album = current_user.album
     @picture = Picture.find(params[:id])
+
+    # YOUTUBE API
     # @response = JSON.parse((RestClient.get "https://api.imagga.com/v1/tagging?url=#{@picture.picture_remote_url}", { :Authorization => auth }))
     @response = JSON.parse(@picture.tags)
     @tags = @response.fetch("results").first.fetch("tags")[0..4]
     @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
-    @firstConfidence = @response.fetch("results").first.fetch("tags").first.fetch("tag")
     @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
-    @third = @response.fetch("results").first.fetch("tags").third.fetch("tag")
     videos = Yt::Collections::Videos.new
     @result = videos.where(order: 'relevance')
     @query = @first+' '+@second
     get_service
     @videos = main(@query)
-    # byebug
     @rand = rand(0..10)
     @link = @videos[@rand][-12..-2]
 
@@ -101,6 +101,17 @@ class PicturesController < ApplicationController
 
   def edit
     @picture = Picture.find(params[:id])
+  end
+
+  def destroy
+    @picture = Picture.find(params[:id])
+    if @picture.destroy
+      flash[:notice] = "Image deleted"
+      redirect_to album_index_path
+    else
+      flash[:alert] = "There was an issue deleting image"
+      render :show
+    end
   end
 
   DEVELOPER_KEY = ENV['GOOGLE_API_KEY']

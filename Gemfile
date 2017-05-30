@@ -62,3 +62,4 @@ gem "paperclip", "~> 4.2"
 gem "font-awesome-rails"
 gem 'jquery-rails'
 gem "chartkick"
+gem 'bootstrap-slider-rails'

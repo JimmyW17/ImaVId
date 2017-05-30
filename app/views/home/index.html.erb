@@ -1,3 +1,4 @@
+<% if !user_signed_in? %>
 <div class="row">
   <div class="col-md-12">
     <h1 class="cover-heading">With An Image</h1>
@@ -18,3 +19,10 @@
       irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </div>
+<% else %>
+<div class="row album">
+  <div class="col-md-6 col-md-offset-3">
+    <%= link_to image_tag(@rand_img), album_picture_path(@album, @picture)%>
+  </div>
+</div>
+<% end %>

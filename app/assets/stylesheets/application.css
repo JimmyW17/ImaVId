@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-slider
  */
  /*
   *= require font-awesome
@@ -47,6 +48,7 @@ html,
 body {
   height: 100%;
   background-color: #333;
+  font-family: 'Slabo 27px', serif;
 }
 body {
   color: #fff;

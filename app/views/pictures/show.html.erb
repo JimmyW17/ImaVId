@@ -1,17 +1,8 @@
-<div class="row album">
-  <div class="col-md-4"></div>
-  <div class="col-md-4"><%= image_tag @picture.picture_remote_url %></div>
-  <div class="col-md-4"></div>
+<div class="row album picture_div">
+  <div class="col-md-6 col-md-offset-3"><%= image_tag @picture.picture_remote_url %></div>
+  <%= link_to "Delete", album_picture_path(@album, @picture), method: :delete %>
 </div>
-<i class="fa fa-picture-o fa-4x" id='gif_icon' aria-hidden="true"></i>
-<i class="fa fa-youtube-play fa-4x" id='youtube_icon' aria-hidden="true"></i>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <span id="gif_render"></span>
-    <span id="youtube_render"></span>
-  </div>
-</div>
-<div class="row">
+<div class="row picture_div">
   <div class="col-md-6">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
   </div>
@@ -19,8 +10,18 @@
     <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-6">
+    <%= form_tag album_picture_path(@album, @picture) do %>
+      <%= text_field_tag 'ytslider', nil, class: 'slider', type: 'text', data: {'slider-id' => 'ytslider', 'slider-min' => '1', 'slider-max' => '50', 'slider-step' => '1', 'slider-value' => '10', 'slider-orientation' => 'vertical', 'slider-selection' => 'after', 'slider-tooltip' => 'hide'} %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>
 <% hash = Hash.new %>
 <% @tags.each do |t| %>
 <% hash[t['tag']] = t['confidence'] %>
 <% end %>
-<%= bar_chart hash %>
+<%= bar_chart hash, colors: ['#538429'], xtitle: "Tag Confidence in Percentage", ytitle: "Tag", library: {scaleFontColor: 'yellow'} %>

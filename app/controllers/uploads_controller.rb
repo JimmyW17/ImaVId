@@ -5,45 +5,48 @@ class UploadsController < ApplicationController
   require 'google/api_client'
   require 'trollop'
 
-
-
-  # api_key = ENV['IMAGGA_API_KEY']
-  # api_secret = ENV['IMAGGA_API_SECRET']
-
-  # @auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
-  # response = RestClient.get "https://api.imagga.com/v1/tagging?url=#{:image_url}", { :Authorization => auth }
-  # attr_accessor :query, :opts
-
-
   def index
     @album = Album.where(user_id: current_user.id)
     api_key = ENV['IMAGGA_API_KEY']
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
     if params[:image_url]
+      # YOUTUBE API
       @json = RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }
       @response = JSON.parse(@json)
+      @tags = @response.fetch("results").first.fetch("tags")[0..4]
+      @confidence = @tags.first['confidence'].ceil
+      if @confidence >= 75
+        flash[:confident] = "We're happy to announce that we're #{@confidence}% sure that the results are accurate!!"
+      elsif @confidence >= 50
+        flash[:maybe] = "We're only #{@confidence}% sure that this is what you're looking for..."
+      else
+        flash[:unconfident] = "Sorry, we're only #{@confidence}% confident with our results, so it's probably wrong... Try uploading another image instead?"
+      end
       @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
-      @firstConfidence = @response.fetch("results").first.fetch("tags").first.fetch("tag")
       @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
-      @third = @response.fetch("results").first.fetch("tags").third.fetch("tag")
       videos = Yt::Collections::Videos.new
       @result = videos.where(order: 'relevance')
       @query = @first+' '+@second
       get_service
       @videos = main(@query)
-      # byebug
-      @link = @videos[0][-12..-2]
+      @rand = rand(0..10)
+      @link = @videos[@rand][-12..-2]
 
       # GIPHY API
       @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
-      @giphyEmbed = @giphyResponse.fetch("data").first.fetch("embed_url")
+      @giphyRange = @giphyResponse.fetch("data").size
+      @giphyRand = rand(0..@giphyRange-1)
+      if @giphyRange > 10
+        @giphyEmbed = @giphyResponse.fetch("data")[rand(0..10)].fetch("embed_url")
+      else
+        @giphyEmbed = @giphyResponse.fetch("data")[@giphyRand].fetch("embed_url")
+      end
 
       if user_signed_in?
         @album = current_user.album
         @picture = Picture.new(:album=>@album)
       end
-      # byebug
       render :index
     end
     puts @response

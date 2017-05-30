@@ -5,51 +5,44 @@
     <% end %>
   </div>
 </div>
+<% if @link %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-
+    <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
+    <% if user_signed_in? %>
+    <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
+    <%= form.hidden_field :image, value: params[:image_url] %>
+    <%= form.hidden_field :tags, value: @json %>
+    <%= form.hidden_field :picture_remote_url, :value => params[:image_url] %>
+    <%= form.submit "Add to Album", class:"btn btn-default"%>
+    <% end %>
+    <% end %>
   </div>
 </div>
-<% if @link %>
-
-<div class="row" id="showImage">
-  <!-- <div class="col-md-6">
-    <div class="row"> -->
-    <i class="fa fa-times-circle fa-2x closeButton" id="closeIcon" aria-hidden="true"></i>
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
-        <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
-          <%= form.hidden_field :image, value: params[:image_url] %>
-          <%= form.hidden_field :tags, value: @json %>
-          <%= form.hidden_field :picture_remote_url, :value => params[:image_url] %>
-          <%= form.submit "Add to Album", class:"btn btn-default"%>
-        <% end %>
-      <!-- </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12"> -->
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
-      <!-- </div>
-    </div>
+<div class="row">
+  <% if flash[:confident] %>
+  <div class="col-md-8 col-md-offset-2" id="confident"><p><%= flash[:confident] %></p></div>
+  <% elsif flash[:maybe] %>
+  <div class="col-md-8 col-md-offset-2" id="maybe"><p><%= flash[:maybe] %></p></div>
+  <% elsif flash[:unconfident] %>
+  <div class="col-md-8 col-md-offset-2" id="unconfident"><p><%= flash[:unconfident] %></p></div>
+  <% else %>
+  <% end %>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
   </div>
   <div class="col-md-6">
-    <div class="row" style="height:557px">
-      <div class="col-md-12 longCol"> -->
-        <iframe src="<%=@giphyEmbed%>" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-      </div>
-      <div class="col-md-3"></div>
-    <!-- </div>
-  </div> -->
+    <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+  </div>
 </div>
+<% hash = Hash.new %>
+<% @tags.each do |t| %>
+<% hash[t['tag']] = t['confidence'] %>
+<% end %>
+<%= bar_chart hash %>
 <% end %>
 
-
-
-<!-- <h2>Youtube test form</h2>
-<%= form_tag"/uploads",method: "get" do %>
-<%= label_tag(:q, "Search Youtube:") %>
-<%= text_field_tag(:q) %>
-<%= submit_tag("Submit") %>
-<% end %> -->
 <%= javascript_include_tag 'upload', 'data-turbolinks-track': 'reload' %>
