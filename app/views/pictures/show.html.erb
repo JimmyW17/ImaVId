@@ -1,4 +1,4 @@
-<div class="background_div">
+<div class="background_div container">
   <div class="row album picture_show_image">
     <div class="col-md-6 col-md-offset-3 picture_div"><%= image_tag @picture.picture_remote_url %></div>
     <div class="col-md-6 col-md-offset-3">
@@ -9,30 +9,30 @@
 <div class="row confidence">
   <% if flash[:confident] %>
   <div class="col-md-8 col-md-offset-2" id="confident">
-    <p>
+    <h3>
       <i class="fa fa-info-circle" aria-hidden="true"></i>
-      <%= flash[:confident] %></p>
+      <%= flash[:confident] %></h3>
   </div>
   <% elsif flash[:maybe] %>
   <div class="col-md-8 col-md-offset-2" id="maybe">
-    <p>
+    <h3>
       <i class="fa fa-info-circle" aria-hidden="true"></i>
-      <%= flash[:maybe] %></p>
+      <%= flash[:maybe] %></h3>
   </div>
   <% elsif flash[:unconfident] %>
   <div class="col-md-8 col-md-offset-2" id="unconfident">
-    <p>
+    <h3>
       <i class="fa fa-info-circle" aria-hidden="true"></i>
-      <%= flash[:unconfident] %></p>
+      <%= flash[:unconfident] %></h3>
   </div>
 <% else %>
   <% end %>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 col-xs-12">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 col-xs-12">
     <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
   </div>
 </div>

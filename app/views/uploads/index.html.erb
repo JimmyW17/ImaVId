@@ -1,4 +1,4 @@
-<div class="background_div">
+<div class="container background_div">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 form-group upload_form_div">
       <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
@@ -25,14 +25,14 @@
 
 <div class="row confidence">
   <% if flash[:confident] %>
-  <div class="col-md-8 col-md-offset-2" id="confident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
-<%= flash[:confident] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="confident"><h3><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:confident] %></h3></div>
   <% elsif flash[:maybe] %>
-  <div class="col-md-8 col-md-offset-2" id="maybe"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
-<%= flash[:maybe] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="maybe"><h3><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:maybe] %></h3></div>
   <% elsif flash[:unconfident] %>
-  <div class="col-md-8 col-md-offset-2" id="unconfident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
-<%= flash[:unconfident] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="unconfident"><h3><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:unconfident] %></h3></div>
   <% else %>
   <% end %>
 </div>

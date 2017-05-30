@@ -11,6 +11,7 @@
 .padding-0 {
   padding-right: 0;
   padding-left: 0;
+  // margin-right: 10px;
 }
 
 .album img{
@@ -18,15 +19,20 @@
   height: auto;
   width: 100%;
   margin: 0 auto;
+  box-shadow: 10px 10px black;
 }
 
 .album {
   margin-bottom: 30px;
   width: 100%;
+  // box-shadow: 10px 10px 10px #888888;
 }
 
 .image-wrapper {
   height: 159px;
   overflow: hidden;
-  padding: 0px;
+  box-shadow: 10px 10px black;
+  // width: 90%;
+  // padding-right: 5px;
+  // padding: 0px;
 }

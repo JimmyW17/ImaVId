@@ -6,7 +6,7 @@ input {
   color: black !important;
   background-color: transparent !important;
   border: 3px solid black !important;
-  margin-top: 10px;
+  // margin-top: 100px;
   // border-color: black !important;
 }
 
@@ -14,6 +14,9 @@ input::placeholder {
   color: black !important;
 }
 
+.upload_form_div input {
+  margin-top: 100px;
+}
 
 .closeButton {
   position: absolute;
@@ -21,11 +24,11 @@ input::placeholder {
 }
 
 .confidence {
-  color: black;
+  color: white;
 }
 
 .image_div {
-  margin-top: 160px;
+  margin-top: 70px;
 }
 #showImage {
   width: 90% !important;
@@ -45,17 +48,17 @@ input::placeholder {
   top: 25%;
 }
 
-#confident {
-  background-color: green;
-}
-
-#maybe {
-  background-color: yellow;
-}
-
-#unconfident {
-  background-color: red;
-}
+// #confident {
+//   background-color: green;
+// }
+//
+// #maybe {
+//   background-color: yellow;
+// }
+//
+// #unconfident {
+//   background-color: red;
+// }
 
 // Drag and Drop CSS
 
