@@ -25,6 +25,14 @@ class PicturesController < ApplicationController
     @tags = @response.fetch("results").first.fetch("tags")[0..4]
     @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
     @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
+    @confidence = @tags.first['confidence'].ceil
+    if @confidence >= 75
+      flash[:confident] = "We're happy to announce that we're #{@confidence}% sure that the results are accurate!!"
+    elsif @confidence >= 50
+      flash[:maybe] = "We're only #{@confidence}% sure that this is what you're looking for..."
+    else
+      flash[:unconfident] = "Sorry, we're only #{@confidence}% confident with our results, so it's probably wrong... Try uploading another image instead?"
+    end
     videos = Yt::Collections::Videos.new
     @result = videos.where(order: 'relevance')
     @query = @first+' '+@second

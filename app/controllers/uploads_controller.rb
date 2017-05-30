@@ -6,7 +6,6 @@ class UploadsController < ApplicationController
   require 'trollop'
 
   def index
-    @album = Album.where(user_id: current_user.id)
     api_key = ENV['IMAGGA_API_KEY']
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp

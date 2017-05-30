@@ -1,27 +1,27 @@
 <% if !user_signed_in? %>
-<div class="row">
+<div class="row black-txt">
   <div class="col-md-12">
-    <h1 class="cover-heading">With An Image</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <h1 class="cover-heading black-txt">With An Image</h1>
+    <p class="lead">A tool that makes storing photos fun</p>
     <p class="lead">
-      <a href="#about" class="btn btn-lg btn-default">Learn more</a>
+      <!-- <a href="#about" class="btn btn-lg btn-default">Upload</a> -->
+      <%= link_to "Upload", uploads_path, class: 'btn btn-lg btn-default'%>
     </p>
   </div>
 </div>
-<div class="row" id="about">
-  <div class="col-md-8">
+<!-- <div class="row black-txt" id="about">
+  <div class="col-md-8 background-white">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
       irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 background-white">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
       irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
-</div>
+</div> -->
 <% else %>
 <div class="row album">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-6 col-md-offset-3" id="home_img">
     <%= link_to image_tag(@rand_img), album_picture_path(@album, @picture)%>
   </div>
 </div>

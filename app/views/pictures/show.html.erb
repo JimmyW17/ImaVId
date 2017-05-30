@@ -1,6 +1,23 @@
-<div class="row album picture_div">
-  <div class="col-md-6 col-md-offset-3"><%= image_tag @picture.picture_remote_url %></div>
+<div class="row album picture_show_image">
+  <div class="col-md-6 col-md-offset-3 picture_div"><%= image_tag @picture.picture_remote_url %></div>
+  <div class="col-md-6 col-md-offset-3">
   <%= link_to "Delete", album_picture_path(@album, @picture), method: :delete %>
+  </div>
+</div>
+
+<br>
+<div class="row confidence">
+  <% if flash[:confident] %>
+  <div class="col-md-8 col-md-offset-2" id="confident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:confident] %></p></div>
+  <% elsif flash[:maybe] %>
+  <div class="col-md-8 col-md-offset-2" id="maybe"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:maybe] %></p></div>
+  <% elsif flash[:unconfident] %>
+  <div class="col-md-8 col-md-offset-2" id="unconfident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:unconfident] %></p></div>
+  <% else %>
+  <% end %>
 </div>
 <div class="row picture_div">
   <div class="col-md-6">

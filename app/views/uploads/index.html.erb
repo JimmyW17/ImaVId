@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 form-group">
+  <div class="col-md-6 col-md-offset-3 form-group upload_form_div">
     <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
     <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control' %>
     <% end %>
@@ -19,13 +19,16 @@
     <% end %>
   </div>
 </div>
-<div class="row">
+<div class="row confidence">
   <% if flash[:confident] %>
-  <div class="col-md-8 col-md-offset-2" id="confident"><p><%= flash[:confident] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="confident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:confident] %></p></div>
   <% elsif flash[:maybe] %>
-  <div class="col-md-8 col-md-offset-2" id="maybe"><p><%= flash[:maybe] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="maybe"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:maybe] %></p></div>
   <% elsif flash[:unconfident] %>
-  <div class="col-md-8 col-md-offset-2" id="unconfident"><p><%= flash[:unconfident] %></p></div>
+  <div class="col-md-8 col-md-offset-2" id="unconfident"><p><i class="fa fa-info-circle" aria-hidden="true"></i>
+<%= flash[:unconfident] %></p></div>
   <% else %>
   <% end %>
 </div>

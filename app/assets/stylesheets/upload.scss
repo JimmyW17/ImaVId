@@ -3,8 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 input {
-  color: white !important;
+  color: black !important;
   background-color: transparent !important;
+  border-color: black !important;
 }
 
 .closeButton {
@@ -12,6 +13,9 @@ input {
   right: 0px;
 }
 
+.confidence {
+  color: black;
+}
 
 #showImage {
   width: 90% !important;

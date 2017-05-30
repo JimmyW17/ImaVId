@@ -9,7 +9,18 @@
 }
 
 .picture_div {
+  height: 380px;
+  overflow: hidden;
+  // max-height: 380px;
+}
 
+.picture_show_image {
+  margin-left: 33px;
+}
+.picture_div img {
+  // max-width: 600px;
+  // max-height: 380px;
+  // overflow: hidden;
 }
 
 canvas {
