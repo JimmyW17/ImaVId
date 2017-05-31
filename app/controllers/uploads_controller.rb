@@ -44,6 +44,8 @@ class UploadsController < ApplicationController
 
       if user_signed_in?
         @album = current_user.album
+        puts current_user
+        puts @album
         @picture = Picture.new(:album=>@album)
       end
       render :index
