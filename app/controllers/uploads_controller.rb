@@ -29,7 +29,6 @@ class UploadsController < ApplicationController
       @query = @first+' '+@second
       get_service
       @videos = main(@query)
-      byebug
       @rand = rand(0..10)
       @link = @videos[@rand][-12..-2]
 
@@ -61,7 +60,6 @@ class UploadsController < ApplicationController
       get_service
       @videos = main(@query)
       @link = @videos[0][-12..-2]
-      byebug
     end
   end
 
@@ -100,11 +98,11 @@ class UploadsController < ApplicationController
   def main(query)
     puts "query..........."
     puts query
-    opts = Trollop::options do
-      opt :q, 'Search term', :type => String, :default => query
-      opt :max_results, 'Max results', :type => :int, :default => 25
-    end
-
+    # opts = Trollop::options do
+    #   opt :q, 'Search term', :type => String, :default => query
+    #   opt :max_results, 'Max results', :type => :int, :default => 25
+    # end
+    opts = {:q=>query, :max_results=> 25, :help=>false}
     client, youtube = get_service
 
     begin
