@@ -23,10 +23,16 @@ class UploadsController < ApplicationController
         flash[:unconfident] = "Sorry, we're only #{@confidence}% confident with our results, so it's probably wrong... Try uploading another image instead?"
       end
       @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
-      @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
+      if @response.fetch("results").first.fetch("tags").second
+        @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
+      end
       videos = Yt::Collections::Videos.new
       @result = videos.where(order: 'relevance')
-      @query = @first+' '+@second
+
+      @query = @first
+      if @second
+        @query+= ' '+@second
+      end
       get_service
       @videos = main(@query)
       @rand = rand(0..10)
