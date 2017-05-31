@@ -19,12 +19,22 @@
       irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
 </div> -->
-<% else %>
+<% elsif @rand_img %>
 <div class="background_div">
 <div class="row album home_image">
   <div class="col-md-6 col-md-offset-3" id="home_img">
     <%= link_to image_tag(@rand_img), album_picture_path(@album, @picture)%>
   </div>
 </div>
+</div>
+<% else %>
+<div class="row black-txt background_div">
+  <div class="col-md-12">
+    <h1 class="cover-heading black-txt">Upload an image to get started!</h1>
+    <p class="lead">
+      <!-- <a href="#about" class="btn btn-lg btn-default">Upload</a> -->
+      <%= link_to "Upload", uploads_path, class: 'btn btn-lg btn-default'%>
+    </p>
+  </div>
 </div>
 <% end %>
