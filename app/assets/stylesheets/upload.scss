@@ -1,8 +1,11 @@
 // Place all the styles related to the upload controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 input {
+  color: black !important;
+}
+
+#uploadForm input {
   color: black !important;
   background-color: transparent !important;
   border: 3px solid black !important;
@@ -10,7 +13,7 @@ input {
   // border-color: black !important;
 }
 
-input::placeholder {
+#uploadForm input::placeholder {
   color: black !important;
 }
 
