@@ -2,6 +2,7 @@
 
   <div class="row album">
     <% @cols = 1 %>
+    <% if Picture.all.size > 0 %>
     <% @pictures.each do |picture| %>
     <% if picture.picture_remote_url? %>
     <% if @cols <= 4 %>
@@ -20,6 +21,7 @@
       </div>
     </a>
     <% @cols = 2 %>
+    <% end %>
     <% end %>
     <% end %>
     <% end %>
