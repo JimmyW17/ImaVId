@@ -14,5 +14,6 @@ class User < ApplicationRecord
 
   def link_user_album
     User.last.create_album
+    puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ALBUM CREATED@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
   end
 end
