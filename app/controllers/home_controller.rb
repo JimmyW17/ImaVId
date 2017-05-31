@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @haspictures = false;
-    if user_signed_in?
+    if user_signed_in? && Picture.all.size > 0
       if current_user.album.pictures && current_user.album.pictures.size > 0
         @album = current_user.album
         @pictures = @album.pictures
