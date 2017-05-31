@@ -47,8 +47,8 @@ class UploadsController < ApplicationController
         puts current_user
         puts @album
         puts @album.id
-        # @picture = Picture.new(:album=>@album)
-        @picture = @album.pictures.new()
+        @picture = Picture.new(:album=>@album)
+        # @picture = @album.pictures.new()
       end
       render :index
     end
