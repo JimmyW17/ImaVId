@@ -66,6 +66,14 @@ body {
   background-position: center;
 
 }
+.logo {
+  margin: 0;
+}
+
+.logo img {
+  position: relative;
+  top: -20px;
+}
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
