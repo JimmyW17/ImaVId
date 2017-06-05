@@ -1,3 +1,4 @@
+![](http://i.imgur.com/rTat7GJ.gif)
 https://withanimage.herokuapp.com/
 
 # With An Image
@@ -27,4 +28,3 @@ This app is heavily influenced by the online entertainment hubs such as imgur, g
 
 -Chartkick library for graphing Imagga API data
 
-![](http://i.imgur.com/rTat7GJ.gif)
