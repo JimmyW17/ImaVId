@@ -16,10 +16,15 @@ This app is heavily influenced by the online entertainment hubs such as imgur, g
 
 ## Technology & languages used
 -Ruby on Rails
+
 -HTML/CSS/JS
+
 -API (Youtube data, GIPHY, Imagga)
+
 -Bootstrap for mobile responsiveness
+
 -SQLite3
+
 -Chartkick library for graphing Imagga API data
 
 ![](http://i.imgur.com/rTat7GJ.gif)
