@@ -1,7 +1,7 @@
+# With An Image
+
 ![](http://i.imgur.com/rTat7GJ.gif)
 https://withanimage.herokuapp.com/
-
-# With An Image
 
 Have an image, but it's static and boring? Upload that image and watch as content is generated!
 
