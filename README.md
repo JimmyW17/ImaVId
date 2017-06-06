@@ -13,7 +13,7 @@ Have an image, but it's static and boring? Upload that image and watch as conten
 
 ## The inspiration for this app
 
-This app is heavily influenced by the online entertainment hubs such as imgur, giphy, and reddit. I wanted to make an app where anyone can spend hours on and have fun.
+This app is heavily influenced by online entertainment hubs such as imgur, giphy, and reddit. I wanted to make an app where anyone can spend hours on and have fun.
 
 ## Technology & languages used
 
@@ -26,6 +26,8 @@ This app is heavily influenced by the online entertainment hubs such as imgur, g
 ### Frontend
 
 -Bootstrap
+
+-Vanilla JS
 
 -Chartkick
 
