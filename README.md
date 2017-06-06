@@ -3,7 +3,7 @@
 ![](http://i.imgur.com/rTat7GJ.gif)
 https://withanimage.herokuapp.com/
 
-Have an image, but it's static and boring? Upload that image and watch as content is generated!
+Have an image, but it's static and boring? Upload that image and watch as content is dynamically generated!
 
 -Generates Youtube videos and gifs from GIPHY. 
 
