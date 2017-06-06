@@ -31,3 +31,10 @@ This app is heavily influenced by online entertainment hubs such as imgur, giphy
 
 -Chartkick
 
+### API
+
+-Youtube data
+
+-Imagga 
+
+-GIPHY
