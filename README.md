@@ -16,15 +16,16 @@ Have an image, but it's static and boring? Upload that image and watch as conten
 This app is heavily influenced by the online entertainment hubs such as imgur, giphy, and reddit. I wanted to make an app where anyone can spend hours on and have fun.
 
 ## Technology & languages used
+
+### Backend
+
 -Ruby on Rails
-
--HTML/CSS/JS
-
--API (Youtube data, GIPHY, Imagga)
-
--Bootstrap for mobile responsiveness
 
 -SQLite3
 
--Chartkick library for graphing Imagga API data
+### Frontend
+
+-Bootstrap
+
+-Chartkick
 
