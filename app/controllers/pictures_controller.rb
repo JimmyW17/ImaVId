@@ -6,11 +6,6 @@ class PicturesController < ApplicationController
   require 'trollop'
   attr_reader :image_remote_url
 
-  def image_remote_url=(url_value)
-    self.image = URI.parse(url_value)
-    @image_remote_url = url_value
-  end
-
   def index
     @pictures = Picture.all
   end
@@ -19,13 +14,17 @@ class PicturesController < ApplicationController
     @album = current_user.album
     @picture = Picture.find(params[:id])
 
-    # YOUTUBE API
-    # @response = JSON.parse((RestClient.get "https://api.imagga.com/v1/tagging?url=#{@picture.picture_remote_url}", { :Authorization => auth }))
+    # Imagga API
+    # Converts tags to JSON format
     @response = JSON.parse(@picture.tags)
+
+    # Retrieves tags and confidences
     @tags = @response.fetch("results").first.fetch("tags")[0..4]
     @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
     @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
     @confidence = @tags.first['confidence'].ceil
+
+    # Confidence flash messages
     if @confidence >= 75
       flash[:confident] = "We're happy to announce that we're #{@confidence}% sure that the results are accurate!!"
     elsif @confidence >= 50
@@ -33,17 +32,34 @@ class PicturesController < ApplicationController
     else
       flash[:unconfident] = "Sorry, we're only #{@confidence}% confident with our results, so it's probably wrong... Try uploading another image instead?"
     end
+
+    # Youtube API
+    # Initialize
     videos = Yt::Collections::Videos.new
+
+    # Orders videos by relevance
     @result = videos.where(order: 'relevance')
+
+    # Sets Youtube search query using top two tags
     @query = @first+' '+@second
+
+    # Passes query as param for Youtube API
     get_service
     @videos = main(@query)
+
+    # Gets random video link from range 1..10
     @rand = rand(0..10)
     @link = @videos[@rand][-12..-2]
 
     # GIPHY API
+
+    # Gets gif using first and second picture tags
     @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+
+    # Gets size of results
     @giphyRange = @giphyResponse.fetch("data").size
+
+    # Sets range
     @giphyRand = rand(0..@giphyRange-1)
     if @giphyRange > 10
       @giphyEmbed = @giphyResponse.fetch("data")[rand(0..10)].fetch("embed_url")
@@ -53,25 +69,10 @@ class PicturesController < ApplicationController
 
     if user_signed_in?
       @album = current_user.album
-      # @picture = Picture.new(:album=>@album)
     end
-    # byebug
-    # render :index
 
     puts @response
-    # byebug
 
-    # Youtube stuff
-    videos = Yt::Collections::Videos.new
-    @result = videos.where(order: 'relevance')
-
-    if params[:q]
-      @query = params[:q]
-      get_service
-      @videos = main(@query)
-      @link = @videos[0][-12..-2]
-      # byebug
-    end
   end
 
   def new
@@ -185,6 +186,6 @@ class PicturesController < ApplicationController
   private
 
   def picture_params
-    params.require(:picture).permit(:image, :picture_remote_url, :tags)
+    params.require(:picture).permit(:picture_remote_url, :tags)
   end
 end
