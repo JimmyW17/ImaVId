@@ -1,25 +1,40 @@
-# README
+# With An Image
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![](http://i.imgur.com/rTat7GJ.gif)
+https://withanimage.herokuapp.com/
 
-Things you may want to cover:
+Have an image, but it's static and boring? Upload that image and watch as content is dynamically generated!
 
-* Ruby version
+-Generates Youtube videos and gifs from GIPHY. 
 
-* System dependencies
+-Shows charts that visualizes how the content is derived from the image.
 
-* Configuration
+-Saves images in albums for each user.
 
-* Database creation
+## The inspiration for this app
 
-* Database initialization
+This app is heavily influenced by online entertainment hubs such as imgur, giphy, and reddit. I wanted to make an app where anyone can spend hours on and have fun.
 
-* How to run the test suite
+## Technology & languages used
 
-* Services (job queues, cache servers, search engines, etc.)
+### Backend
 
-* Deployment instructions
+-Ruby on Rails
 
-* ...
-# ImaVId
+-SQLite3
+
+### Frontend
+
+-Bootstrap
+
+-Vanilla JS
+
+-Chartkick
+
+### API
+
+-Youtube data
+
+-Imagga 
+
+-GIPHY
