@@ -4,10 +4,6 @@ class AlbumController < ApplicationController
     @pictures = current_user.album.pictures.all
   end
 
-  def show
-
-  end
-
   def edit
     @album = Album.find(current_user.id)
   end

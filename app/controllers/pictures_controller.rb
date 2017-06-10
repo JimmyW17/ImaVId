@@ -71,13 +71,10 @@ class PicturesController < ApplicationController
       @album = current_user.album
     end
 
-    puts @response
-
   end
 
   def new
     @album = Album.where(user_id: current_user.id)
-    # byebug
     @picture = @album.pictures.new
   end
 
@@ -85,8 +82,6 @@ class PicturesController < ApplicationController
     @user = current_user
     @album = @user.album
     @picture = @album.pictures.new(picture_params)
-    # picture_from_url(params[:image_url])
-    # @picture.save!
     if @picture.save
       flash[:notice] = "Image saved"
       redirect_to album_index_path
@@ -123,6 +118,7 @@ class PicturesController < ApplicationController
     end
   end
 
+  # Youtube API Methods
   DEVELOPER_KEY = ENV['GOOGLE_API_KEY']
   YOUTUBE_API_SERVICE_NAME = 'youtube'
   YOUTUBE_API_VERSION = 'v3'

@@ -6,14 +6,23 @@ class UploadsController < ApplicationController
   require 'trollop'
 
   def index
+
+    # Imagga API
     api_key = ENV['IMAGGA_API_KEY']
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
     if params[:image_url]
-      # YOUTUBE API
+
+      # Calls Imagga API with image as param
       @json = RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }
+
+      # Records API response
       @response = JSON.parse(@json)
+
+      # Records tags
       @tags = @response.fetch("results").first.fetch("tags")[0..4]
+
+      # Gets confidence and sets flash message
       @confidence = @tags.first['confidence'].ceil
       if @confidence >= 75
         flash[:confident] = "We're happy to announce that we're #{@confidence}% sure that the results are accurate!!"
@@ -22,25 +31,40 @@ class UploadsController < ApplicationController
       else
         flash[:unconfident] = "Sorry, we're only #{@confidence}% confident with our results, so it's probably wrong... Try uploading another image instead?"
       end
+
+      # Gets top tags
       @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
       if @response.fetch("results").first.fetch("tags").second
         @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
       end
+
+      # Youtube API
       videos = Yt::Collections::Videos.new
+
+      # Order by relevance
       @result = videos.where(order: 'relevance')
 
+      # Sets query
       @query = @first
       if @second
         @query+= ' '+@second
       end
+
+      # Calls Youtube API methods with query as params
       get_service
       @videos = main(@query)
+
+      # Videos range
       @rand = rand(0..10)
       @link = @videos[@rand][-12..-2]
 
       # GIPHY API
       @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+
+      # Gets number of gifs from result
       @giphyRange = @giphyResponse.fetch("data").size
+
+      # Gets random gif from range
       @giphyRand = rand(0..@giphyRange-1)
       if @giphyRange > 10
         @giphyEmbed = @giphyResponse.fetch("data")[rand(0..10)].fetch("embed_url")
@@ -54,22 +78,8 @@ class UploadsController < ApplicationController
         puts @album
         puts @album.id
         @picture = Picture.new(:album=>@album)
-        # @picture = @album.pictures.new()
       end
       render :index
-    end
-    puts @response
-    # byebug
-
-    # Youtube stuff
-    videos = Yt::Collections::Videos.new
-    @result = videos.where(order: 'relevance')
-
-    if params[:q]
-      @query = params[:q]
-      get_service
-      @videos = main(@query)
-      @link = @videos[0][-12..-2]
     end
   end
 
@@ -90,6 +100,7 @@ class UploadsController < ApplicationController
   # {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
   # Please ensure that you have enabled the YouTube Data API for your project.
 
+  # Youtube API Methods
   DEVELOPER_KEY = ENV['GOOGLE_API_KEY']
   YOUTUBE_API_SERVICE_NAME = 'youtube'
   YOUTUBE_API_VERSION = 'v3'
@@ -108,10 +119,6 @@ class UploadsController < ApplicationController
   def main(query)
     puts "query..........."
     puts query
-    # opts = Trollop::options do
-    #   opt :q, 'Search term', :type => String, :default => query
-    #   opt :max_results, 'Max results', :type => :int, :default => 25
-    # end
     opts = {:q=>query, :max_results=> 25, :help=>false}
     client, youtube = get_service
 

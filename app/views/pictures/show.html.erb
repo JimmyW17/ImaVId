@@ -1,3 +1,4 @@
+<!-- Image Container -->
 <div class="background_div container">
   <div class="row album picture_show_image">
     <div class="col-md-6 col-md-offset-3 picture_div"><%= image_tag @picture.picture_remote_url %></div>
@@ -6,6 +7,8 @@
     </div>
   </div>
 </div>
+
+<!-- Confidence flash message -->
 <div class="row confidence">
   <% if flash[:confident] %>
   <div class="col-md-8 col-md-offset-2" id="confident">
@@ -28,15 +31,20 @@
 <% else %>
   <% end %>
 </div>
+
+<!-- Youtube Video -->
 <div class="row">
   <div class="col-md-6 col-xs-12">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>
   </div>
+
+  <!-- GIPHY GIf -->
   <div class="col-md-6 col-xs-12">
     <iframe src="<%=@giphyEmbed%>" width="560" height="315" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
   </div>
 </div>
 
+<!-- Confidence graph -->
 <% hash = Hash.new %>
 <% @tags.each do |t| %>
 <% hash[t['tag']] = t['confidence'] %>
