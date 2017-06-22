@@ -9,11 +9,10 @@
 }
 
 .picture_div {
-  height: 330px;
+  // height: 80%;
   overflow: hidden;
-  max-width: 550px;
+  // max-width: 550px;
   // max-height: 380px;
-  margin-top: 210px;
 }
 
 .picture_show_image {
@@ -23,6 +22,7 @@
   // max-width: 600px;
   // max-height: 380px;
   // overflow: hidden;
+  height: 80%;
 }
 
 canvas {
