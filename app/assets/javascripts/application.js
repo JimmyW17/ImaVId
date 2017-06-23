@@ -10,11 +10,21 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require_self
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-//= require jquery
 //= require jquery_ujs
+//= require jquery.flexslider
 //= require Chart.bundle
 //= require chartkick
 //= require bootstrap-slider
+
+// FlexSlider
+$(window).on('load', function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    slideshow: true,
+    slideshowSpeed: 3000
+   });
+});

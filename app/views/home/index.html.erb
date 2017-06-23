@@ -22,8 +22,14 @@
 <% elsif @haspictures %>
 <div class="background_div">
 <div class="row album home_image">
-  <div class="col-md-6 col-md-offset-3" id="home_img">
-    <%= link_to image_tag(@rand_img), album_picture_path(@album, @picture)%>
+  <div class="flexslider">
+    <ul class="slides">
+      <% @pictures.each do |picture| %>
+      <li class="content">
+        <%= link_to image_tag(picture.picture_remote_url), album_picture_path(@album, picture)%>
+      </li>
+      <% end %>
+    </ul>
   </div>
 </div>
 </div>
