@@ -12,7 +12,6 @@
 //
 //= require_self
 //= require rails-ujs
-//= require turbolinks
 //= require_tree .
 //= require jquery_ujs
 //= require jquery.flexslider
