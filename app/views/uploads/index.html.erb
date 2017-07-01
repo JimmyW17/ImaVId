@@ -9,7 +9,7 @@
   <% if @link %>
   <div class="row image_div">
     <div class="col-md-6 col-md-offset-3 image_ujs">
-      <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
+      <img src="<%=params[:image_url] %>" alt="" style="width: 500px">
       <% if user_signed_in? %>
       <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
       <%= form.hidden_field :image, value: params[:image_url] %>

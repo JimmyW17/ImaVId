@@ -3,7 +3,7 @@
   <div class="row album picture_show_image">
     <div class="col-md-6 col-md-offset-3 picture_div"><%= image_tag @picture.picture_remote_url %></div>
     <div class="col-md-6 col-md-offset-3">
-      <%= link_to "Delete", album_picture_path(@album, @picture), method: :delete %>
+      <%= link_to "Delete", album_picture_path(@album, @picture), class:"btn btn-default", method: :delete %>
     </div>
   </div>
 </div>
