@@ -1,14 +1,14 @@
 <div class="container background_div">
-  <div class="row">
+  <div class="row upload_row">
     <div class="col-md-6 col-md-offset-3 form-group upload_form_div">
-      <%= form_tag"/uploads", id: "uploadForm", method: "get" do %>
+      <%= form_tag "/uploads", id: "uploadForm", method: "get" do %>
       <%= text_field_tag :image_url, "", placeholder:'Enter url to an image here. . .', class:'form-control', autofocus: :true %>
       <% end %>
     </div>
   </div>
   <% if @link %>
   <div class="row image_div">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 image_ujs">
       <img src="<%=params[:image_url] %>" alt="" style="width: 300px">
       <% if user_signed_in? %>
       <%= form_for [@album, @picture], html: {multipart: true} do |form|%>
@@ -37,6 +37,7 @@
   <% end %>
 </div>
 <br>
+
 <div class="row">
   <div class="col-md-6">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=@link%>" frameborder="0" allowfullscreen></iframe>

@@ -12,16 +12,12 @@ class UploadsController < ApplicationController
     api_secret = ENV['IMAGGA_API_SECRET']
     auth = 'Basic ' + Base64.strict_encode64( "#{api_key}:#{api_secret}" ).chomp
     if params[:image_url]
-
       # Calls Imagga API with image as param
       @json = RestClient.get "https://api.imagga.com/v1/tagging?url=#{params[:image_url]}", { :Authorization => auth }
-
       # Records API response
       @response = JSON.parse(@json)
-
       # Records tags
       @tags = @response.fetch("results").first.fetch("tags")[0..4]
-
       # Gets confidence and sets flash message
       @confidence = @tags.first['confidence'].ceil
       if @confidence >= 75
@@ -31,7 +27,6 @@ class UploadsController < ApplicationController
       else
         flash[:unconfident] = "Sorry, we're only #{@confidence}% confident with our results, so it's probably wrong... Try uploading another image instead?"
       end
-
       # Gets top tags
       @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
       if @response.fetch("results").first.fetch("tags").second
@@ -40,30 +35,26 @@ class UploadsController < ApplicationController
 
       # Youtube API
       videos = Yt::Collections::Videos.new
-
       # Order by relevance
       @result = videos.where(order: 'relevance')
-
-      # Sets query
+      # Sets query 1
       @query = @first
+      # Sets query 2 if it exists
       if @second
         @query+= ' '+@second
       end
-
       # Calls Youtube API methods with query as params
       get_service
       @videos = main(@query)
-
       # Videos range
       @rand = rand(0..10)
+      # Video link 1
       @link = @videos[@rand][-12..-2]
 
       # GIPHY API
       @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
-
       # Gets number of gifs from result
       @giphyRange = @giphyResponse.fetch("data").size
-
       # Gets random gif from range
       @giphyRand = rand(0..@giphyRange-1)
       if @giphyRange > 10
@@ -72,13 +63,13 @@ class UploadsController < ApplicationController
         @giphyEmbed = @giphyResponse.fetch("data")[@giphyRand].fetch("embed_url")
       end
 
-      if user_signed_in?
-        @album = current_user.album
-        puts current_user
-        puts @album
-        puts @album.id
-        @picture = Picture.new(:album=>@album)
-      end
+      # if user_signed_in?
+      #   @album = current_user.album
+      #   puts current_user
+      #   puts @album
+      #   puts @album.id
+      #   @picture = Picture.new(:album=>@album)
+      # end
       render :index
     end
   end
@@ -91,14 +82,6 @@ class UploadsController < ApplicationController
       redirect_to root_path
     end
   end
-
-
-
-
-  # Set DEVELOPER_KEY to the API key value from the APIs & auth > Credentials
-  # tab of
-  # {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
-  # Please ensure that you have enabled the YouTube Data API for your project.
 
   # Youtube API Methods
   DEVELOPER_KEY = ENV['GOOGLE_API_KEY']
