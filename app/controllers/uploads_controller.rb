@@ -63,13 +63,13 @@ class UploadsController < ApplicationController
         @giphyEmbed = @giphyResponse.fetch("data")[@giphyRand].fetch("embed_url")
       end
 
-      # if user_signed_in?
-      #   @album = current_user.album
-      #   puts current_user
-      #   puts @album
-      #   puts @album.id
-      #   @picture = Picture.new(:album=>@album)
-      # end
+      if user_signed_in?
+        @album = current_user.album
+        puts current_user
+        puts @album
+        puts @album.id
+        @picture = Picture.new(:album=>@album)
+      end
       render :index
     end
   end
