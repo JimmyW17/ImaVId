@@ -5,10 +5,10 @@ var $graph = '<%= escape_javascript(render partial: "graph")%>';
 
 $('.image_div').css('display', 'block');
 $('.image_div').append($image);
+<% if user_signed_in? %>
+var $add_to_album_partial = '<%= escape_javascript(render partial: "add_to_album_form") %>';
+$('.image_div').append($add_to_album_partial);
+<% end %>
 $('.image_div').append($youtube_gif);
 $('.image_div').append($graph);
 $('.confidence_div').html($confidence_flash_partial);
-<% if user_signed_in? %>
-var $add_to_album_partial = '<%= escape_javascript(render partial: "add_to_album_form") %>';
-$('.image_ujs').append($add_to_album_partial);
-<% end %>
