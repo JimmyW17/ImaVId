@@ -52,7 +52,11 @@ class UploadsController < ApplicationController
       @link = @videos[@rand][-12..-2]
 
       # GIPHY API
-      @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+      if @second
+        @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+      else
+        @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+      end
       # Gets number of gifs from result
       @giphyRange = @giphyResponse.fetch("data").size
       # Gets random gif from range

@@ -21,7 +21,9 @@ class PicturesController < ApplicationController
     # Retrieves tags and confidences
     @tags = @response.fetch("results").first.fetch("tags")[0..4]
     @first = @response.fetch("results").first.fetch("tags").first.fetch("tag")
-    @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
+    if @response.fetch("results").first.fetch("tags").second
+      @second = @response.fetch("results").first.fetch("tags").second.fetch("tag")
+    end
     @confidence = @tags.first['confidence'].ceil
 
     # Confidence flash messages
@@ -41,7 +43,11 @@ class PicturesController < ApplicationController
     @result = videos.where(order: 'relevance')
 
     # Sets Youtube search query using top two tags
-    @query = @first+' '+@second
+    @query = @first
+    # Sets query 2 if it exists
+    if @second
+      @query+= ' '+@second
+    end
 
     # Passes query as param for Youtube API
     get_service
@@ -54,8 +60,11 @@ class PicturesController < ApplicationController
     # GIPHY API
 
     # Gets gif using first and second picture tags
-    @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
-
+    if @second
+      @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}+#{@second}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+    else
+      @giphyResponse = JSON.parse(RestClient.get "http://api.giphy.com/v1/gifs/search?q=#{@first}&api_key=#{ENV['GIPHY_API_KEY_PUBLIC']}")
+    end
     # Gets size of results
     @giphyRange = @giphyResponse.fetch("data").size
 
