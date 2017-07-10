@@ -1,0 +1,6 @@
+<%= form_for [@album, @picture], html: {multipart: true} do |form|%>
+<%= form.hidden_field :image, value: params[:image_url] %>
+<%= form.hidden_field :tags, value: @json %>
+<%= form.hidden_field :picture_remote_url, :value => params[:image_url] %>
+<%= form.submit "Add to Album", class:"btn btn-default"%>
+<% end %>

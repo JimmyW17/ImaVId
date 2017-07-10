@@ -13,6 +13,10 @@ input {
   // border-color: black !important;
 }
 
+.loading {
+  display: none;
+}
+
 #uploadForm input::placeholder {
   color: black !important;
 }
@@ -27,8 +31,13 @@ input {
 }
 
 .image_div {
-  margin-top: 70px;
+  display: none;
 }
+
+iframe {
+  margin-top: 20px;
+}
+
 #showImage {
   width: 90% !important;
   position: fixed;

@@ -1,0 +1,14 @@
+var $image = '<img src="<%=params[:image_url] %>" alt="" style="width: 500px">';
+var $add_to_album_partial = '<%= escape_javascript(render partial: "add_to_album_form") %>';
+var $confidence_flash_partial = '<%= escape_javascript(render partial: "confidence_flash") %>';
+var $youtube_gif = '<%= escape_javascript(render partial: "youtube_gif") %>';
+var $graph = '<%= escape_javascript(render partial: "graph")%>';
+
+$('.image_div').css('display', 'block');
+$('.image_ujs').html($image);
+<% if user_signed_in? %>
+$('.image_ujs').append($add_to_album_partial);
+$('.confidence_div').html($confidence_flash_partial);
+$('.image_div').append($youtube_gif);
+$('.image_div').append($graph);
+<% end %>

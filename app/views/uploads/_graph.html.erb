@@ -1,0 +1,5 @@
+<% hash = Hash.new %>
+<% @tags.each do |t| %>
+<% hash[t['tag']] = t['confidence'] %>
+<% end %>
+<%= bar_chart hash, colors: ['#538429'], xtitle: "Tag Confidence in Percentage", ytitle: "Tag", library: {scaleFontColor: 'yellow'} %>
