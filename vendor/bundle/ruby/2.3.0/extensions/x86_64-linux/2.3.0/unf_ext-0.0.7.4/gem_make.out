@@ -1,0 +1,16 @@
+current directory: /home/jimmy/Projects/With-An-Image/vendor/bundle/ruby/2.3.0/gems/unf_ext-0.0.7.4/ext/unf_ext
+/usr/bin/ruby2.3 -r ./siteconf20181213-21887-1k8ksod.rb extconf.rb
+checking for main() in -lstdc++... yes
+creating Makefile
+
+current directory: /home/jimmy/Projects/With-An-Image/vendor/bundle/ruby/2.3.0/gems/unf_ext-0.0.7.4/ext/unf_ext
+make "DESTDIR=" clean
+
+current directory: /home/jimmy/Projects/With-An-Image/vendor/bundle/ruby/2.3.0/gems/unf_ext-0.0.7.4/ext/unf_ext
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.so
+
+current directory: /home/jimmy/Projects/With-An-Image/vendor/bundle/ruby/2.3.0/gems/unf_ext-0.0.7.4/ext/unf_ext
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20181213-21887-1tv8l36
